@@ -4,6 +4,9 @@
 equation = 'y = -12x + 11111140.2121'
 x = 2.5
 # вычислите и выведите y
+k, b = [float(num) for num in equation[3:].replace(' ', '').split('x')]
+x = 2.5
+print(k * x + b)
 
 # Задание-2: Дата задана в виде строки формата 'dd.mm.yyyy', проверить корректно ли введена дата
 # Условия коррекности:
@@ -12,8 +15,16 @@ x = 2.5
 # 3. Год приводиться к целому положитеьному числу в диапазоне от 1 до 9999
 # 4. Длина исходной строки для частей должна быть в соответствии с форматом (т.е. 2 - для дня, 2- месяц, 4 -год)
 
+from re import match
+def isDate(date):
+    if match(r'[0-9]{2}.[0-9]{2}.[0-9]{4}', date) != None:
+        day, month, year = [int(item) for item in date.split('.')]
+        if 0 < year < 10000 and 0 < month < 13 and 0 < day < 31 + (month in [1, 3, 5, 7, 8, 10, 12]):
+            return True
+    return False    
 # Пример корректной даты
 date = '01.11.1985'
+print(isDate(date))
 
 # Примеры некорректных дат
 date = '01.22.1001'
@@ -46,3 +57,17 @@ date = '-2.10.3001'
 #
 # Вход: 11
 # Выход: 5 3
+num = int(input('Input room number:'))
+n, i = 0, 1
+
+while n < num:
+    n += i ** 2
+    i += 1
+i -= 1
+n -= i ** 2
+
+floor, room = i * (i - 1) // 2 + (num - n) // i + 1, (num - n) % i
+if room == 0:
+    floor, room = floor - 1, i
+
+print(floor, room)
