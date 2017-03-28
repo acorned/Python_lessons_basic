@@ -8,6 +8,37 @@
 # Ввод: -2/3 - -2
 # Вывод: 1 2/3
 
+from fractions import Fraction
+
+def fractsum(s):
+    fracts = s.split(' + ')
+    if len(fracts) == 2:
+        sign = 1        
+    else:
+        fracts = s.split(' - ')
+        sign = -1
+    fracted = []
+    for fract in fracts:
+        fractsign = 1
+        if fract[0] == '-':
+            fract = fract[1:]
+            fractsign = -1
+        fract = fract.split(' ')
+        if len(fract) == 2:
+            denominator = int(fract[1].split('/')[1])
+            numerator = (int(fract[0]) * denominator + int(fract[1].split('/')[0])) * fractsign         
+        else:
+            if len(fract[0].split('/')) == 2: 
+                denominator = int(fract[0].split('/')[1])
+                numerator = (int(fract[0].split('/')[0])) * fractsign
+            else:
+                denominator = 1
+                numerator = int(fract[0]) * fractsign
+        fracted.append(Fraction(numerator, denominator))
+    result = fracted[0] + sign * fracted[1]
+    return '{} {}'.format(result // 1, result % 1)        
+
+
 # Задание-2:
 # Дана ведомость расчета заработной платы (файл "data/workers").
 # Рассчитайте зарплату всех работников, зная что они получат полный оклад,
