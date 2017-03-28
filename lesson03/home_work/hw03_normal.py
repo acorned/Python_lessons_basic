@@ -2,9 +2,14 @@
 # Напишите функцию возвращающую ряд Фибоначчи с n-элемента до m-элемент
 # Первыми элементами ряда считать цифры 1 1
 
-
 def fibonacci(n, m):
-    pass
+    fib1, fib2 = 0, 1
+    for i in range(m + 1):
+        if i >= n:
+            yield fib1
+        fib1, fib2 = fib2, fib1 + fib2
+        
+print(*fibonacci(8, 15))
 
 # Задача-2:
 # Напишите функцию сортирующую принимаемый список по возрастанию.
@@ -13,7 +18,9 @@ def fibonacci(n, m):
 
 
 def sort_to_max(origin_list):
-    pass
+    if origin_list: return sort_to_max([x for x in origin_list if x < origin_list[0]]) + [x for x in origin_list if x == origin_list[0]] + sort_to_max([x for x in origin_list if x > origin_list[0]])
+    return []
+
 
 sort_to_max([2, 10, -12, 2.5, 20, -11, 4, 4, 0])
 
@@ -21,6 +28,8 @@ sort_to_max([2, 10, -12, 2.5, 20, -11, 4, 4, 0])
 # Напишите собственную реализацию функции filter
 # Разумеется, внутри нельзя использовать саму функцию filter
 
+def own_filter(func, arg):
+    return [item for item in arg if func(item) == True]
 
 # Задача-4:
 # Даны четыре точки А1(х1, у1), А2(x2 ,у2), А3(x3 , у3), А4(х4, у4).
