@@ -35,3 +35,8 @@ def own_filter(func, arg):
 # Даны четыре точки А1(х1, у1), А2(x2 ,у2), А3(x3 , у3), А4(х4, у4).
 # Определить, будут ли они вершинами параллелограмма
 
+def isParallel(a1, a2, a3, a4):
+    return True if (a1[0] + a2[0] == a3[0] + a4[0] and a1[1] + a2[1] == a3[1] + a4[1]) or (abs(a1[0] - a2[0]) == abs(a3[0] - a4[0]) and abs(a1[1] - a2[1]) == abs(a3[1] - a4[1])) else False
+
+a1, a2, a3, a4 = [2, 4], [-3, 7], [-6, 6], [-1, 3]
+print(isParallel(a1, a2, a3, a4))
