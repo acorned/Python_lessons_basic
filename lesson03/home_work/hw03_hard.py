@@ -47,6 +47,28 @@ def fractsum(s):
 # они получают удвоенную ЗП пропорциональную норме.
 # Кол-во часов, которые были отработаны указаны в файле "data/hours_of"
 
+f = open('./data/workers', encoding = 'utf-8')
+db = []
+for line in f:
+    db.append([word.replace('\n', '') for word in line.split(' ') if word != ''])
+g = open('./data/hours_of', encoding = 'utf-8')
+for line in g:
+    hours = [word.replace('\n', '') for word in line.split(' ') if word != '']
+    for man in db:
+        if man[0] == hours[0] and man[1] == hours[1]:
+            man.append(hours[2])
+f.close()
+g.close()
+db[0].append('Получено')
+print('{:<10}{:<10}{:<10}{:<14}{:<13}{:<12}{:<10}'.format(*db[0]))
+for man in db[1:]:
+    salary, required, done = int(man[2]), int(man[4]), int(man[5])
+    if done < required:
+        man.append(round(salary * done / required, 2))
+    else:
+        man.append(round(salary + 2*salary*(done - required)/required, 2))
+    print('{:<10}{:<10}{:<10}{:<14}{:<13}{:<12}{:<10}'.format(*man))
+    
 # Задание-3:
 # Дан файл ("data/fruits") со списком фруктов
 # Записать в новые файлы все фрукты начинающиеся с определенной буквы.
